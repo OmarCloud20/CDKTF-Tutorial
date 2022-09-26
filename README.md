@@ -138,11 +138,12 @@ cdktf --version
 
 If you got this far, congratulations, you have successfully installed and configured all required prerequisites. Give yourself a pat on the back and let's move on to the next section.
 
+---
 
 
 ## Step 2: Initializing First CDKTF Project using Python Template
 
----
+
 In this section, we will learn how to use `CDKTF` commands to create our first AWS CDKTF Python project. We will use the `cdktf init` command to create a new project. The `cdktf init` command creates a new CDKTF project in the current directory. The command creates a new directory with the name of the project and initializes a new git repository. The command also creates a `cdktf.json` file that contains the project configuration. The `cdktf.json` file contains the project name, the programming language, and the Terraform provider. The `cdktf.json` file is used by the `cdktf` command to determine the project configuration.
 
 
@@ -194,7 +195,7 @@ pipenv install cdktf-cdktf-provider-aws
 >Note: as of the 26th of Sep, 2022, if you decide to install the AWS Provider using `cdktf provider add "aws@~>4.0"`, the installation will fail due to [no matching distribution found for version v9.0.36](https://github.com/hashicorp/cdktf-provider-aws/issues/749). There are other methods of importing a provider but this tutorial won't discuss to focus on simplicity. 
 
 
-[![asciicast](https://asciinema.org/a/SW6XcyXuaRir5ODv0UxoYYZHW.svg)](https://asciinema.org/a/SW6XcyXuaRir5ODv0UxoYYZHW)
+[![asciicast](https://asciinema.org/a/523196.svg)](https://asciinema.org/a/523196)
 
 
 
