@@ -199,6 +199,7 @@ pipenv install cdktf-cdktf-provider-aws
 
 [![asciicast](https://asciinema.org/a/523196.svg)](https://asciinema.org/a/523196)
 
+<script id="asciicast-523196" src="https://asciinema.org/a/523196.js" async></script>
 
 
 Congratulations, you have successfully initialized your first CDKTF Python project. This is another milestone to celebrate. Get a cup of coffee ☕️ and let's move on to the next section.
