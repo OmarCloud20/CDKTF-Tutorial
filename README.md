@@ -199,10 +199,11 @@ pipenv install cdktf-cdktf-provider-aws
 
 [![asciicast](https://asciinema.org/a/523196.svg)](https://asciinema.org/a/523196)
 
-<script id="asciicast-523196" src="https://asciinema.org/a/523196.js" async></script>
 
 
 Congratulations, you have successfully initialized your first CDKTF Python project. This is another milestone to celebrate. Get a cup of coffee ☕️ and let's move on to the next section.
+
+---
 
 
 ## Step 3: Configuring an S3 Remote Backend
@@ -528,6 +529,7 @@ Prior to digging into the AWS provider, let's first understand commonly used ter
 
 3. Stack: A stack is a collection of constructs. The `MyStack` class in the `main.py` file is a stack. The `MyStack` class contains constructs that represent S3 constructs, classes and struts. 
 
+---
 
 
 ### Scenario 1: S3 Bucket
@@ -546,6 +548,8 @@ We have to distinguish between required and optional arguments. Required argumen
 ```
 my_3bucket= s3.S3Bucket(self, "s3_bucket")
 ```
+
+---
 
 ### Scenario 2: ECS Cluster
 
@@ -566,6 +570,7 @@ name = "My_Cluster"
 
 ![EC2](images/ecs.png)
 
+---
 
 ### CDKTF Commands:
 
@@ -817,6 +822,7 @@ cdktf deploy
 
 Congratulations! You have successfully deployed a lambda function with a function url using CDKTF. You can copy the function url from the output and paste it in your browser to invoke the lambda function. 
 
+---
 
 
 **To delete the stack, we need to follow the below steps:**
