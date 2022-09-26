@@ -38,7 +38,7 @@ The main topics covered in this tutorial are:
 6. Provisioning an S3 Bucket using CDKTF
 7. Provisioning a Lambda Function URL using CDKTF
 
-This tutorial is also available on [GitHub](https://github.com/OmarCloud20/CDKTF-Tutorial). By the end of this tutorial, you shall be comfortable with the CDKTF framework and be able to deploy your own AWS resources using CDKTF. I will pass you the learning baton and you can take it from there.
+This tutorial is also available on my [GitHub](https://github.com/OmarCloud20/CDKTF-Tutorial) CDKTF Tutorial repo. By the end of this tutorial, you shall be comfortable with the CDKTF framework and be able to deploy your own AWS resources using CDKTF. I will pass you the learning baton and you can take it from there.
 Enough said, let's get started.
 
 ---
