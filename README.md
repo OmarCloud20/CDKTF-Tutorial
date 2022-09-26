@@ -848,6 +848,7 @@ cdktf destroy
 
 ## Conclusion
 
-In this tutorial, we learned how to properly install and configure CDKTF. We also learned how to migrate from local backend to remote backend and set up an S3 remote backend. We also learned how to deploy a lambda function with a function url using CDKTF. In the near future, I will be writing a tutorial on how to deploy multi-stack and multi-environment CDKTF projects. Stay tuned!
-I hope you enjoyed this tutorial and hope it added value to your learning journey. Thank you for reading!
+In this tutorial, we have learned how to properly install and configure CDKTF, how to migrate from local backend to remote backend and how to configure an S3 remote backend. We have also learned how to deploy a lambda function with a function url using CDKTF; in addition, to learning how to read and utilize the CDKTF documentation from the Construct Hub.
+
+Congratulations on completing this tutorial, overcoming these challenges and achieved many learning milestones. I hope you enjoyed this tutorial, and it added value to your learning journey. Thank you for reading!
 
