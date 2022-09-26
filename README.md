@@ -41,6 +41,8 @@ The main topics covered in this tutorial are:
 
 By the end of this tutorial, you will be comfortable with the CDKTF framework and will be able to deploy your own AWS resources using the CDKTF framework. I will pass you the learning baton and you will be able to run with it. Enough said, let's get started.
 
+---
+
 
 ## Step 1: Required Prerequisites  
 
