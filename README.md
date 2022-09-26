@@ -600,10 +600,6 @@ To find out more about the `cdktf` commands, run `cdktf [command] --help` and re
 
 
 
-  convert:
-
-  https://www.terraform.io/cdktf/cli-reference/commands#convert:~:text=%C2%BB-,convert,-This%20command%20converts
-
 ---
 
 
