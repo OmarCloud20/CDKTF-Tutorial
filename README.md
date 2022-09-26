@@ -11,7 +11,7 @@
 - [Step 4: Learn How to Use Construct Hub and AWS Provider Submodules](#step-4-learn-how-to-use-construct-hub-and-aws-provider-submodules)
     - [Scenario 1: S3 Bucket](#scenario-1-s3-bucket)
     - [Scenario 2: ECS Cluster](#scenario-2-ecs-cluster)
-    - [CDKTF Commands:](#cdktf-commands)
+    - [CDKTF Commands](#cdktf-commands)
 - [Step 5: Deploying a Lambda Function URL using CDKTF](#step-5-deploying-a-lambda-function-url-using-cdktf)
 - [Conclusion](#conclusion)
 - [References](#references)
