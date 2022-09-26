@@ -38,8 +38,8 @@ The main topics covered in this tutorial are:
 6. Provisioning an S3 Bucket using CDKTF
 7. Provisioning a Lambda Function URL using CDKTF
 
-
-By the end of this tutorial, you will be comfortable with the CDKTF framework and will be able to deploy your own AWS resources using the CDKTF framework. I will pass you the learning baton and you will be able to run with it. Enough said, let's get started.
+This tutorial is also available on [GitHub](https://github.com/OmarCloud20/CDKTF-Tutorial). By the end of this tutorial, you shall be comfortable with the CDKTF framework and be able to deploy your own AWS resources using CDKTF. I will pass you the learning baton and you can take it from there.
+Enough said, let's get started.
 
 ---
 
@@ -631,7 +631,7 @@ Follow the steps below to deploy a Lambda function URL using CDKTF:
 
 2. Create a new file called `lambda_function.py` in the `lambda` directory.
 
-3. Copy the `lambda_function.py` code from my [GitHub repository](xx) and paste it into the `lambda_function.py` file.
+3. Copy the `lambda_function.py` code from my [GitHub repository](https://raw.githubusercontent.com/OmarCloud20/CDKTF-Tutorial/main/lambda/lambda_function.py) and paste it into the `lambda_function.py` file.
 
 4. I will explain the new `main.py` code and then will provide the final `main.py` file at the end of the section. 
 
