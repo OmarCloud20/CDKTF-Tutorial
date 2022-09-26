@@ -1,6 +1,8 @@
 # CDK for Terraform (CDKTF) on AWS: 
 ## How to Configure an S3 Remote Backend and Deploy a Lambda Function URL using Python on Ubuntu 20.04 LTS
 
+![CDKTF](images/cdktf.png)
+
 ###  Table of Contents
 <!-- TOC -->
 - [Introduction](#introduction)
