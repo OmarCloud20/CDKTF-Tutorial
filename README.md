@@ -89,7 +89,7 @@ pip3 --version
 
 >Note: if `pip` is unavailable, run `sudo apt install python3-pip` to install it as per [Python](https://packaging.python.org/en/latest/guides/installing-using-linux-tools/#debian-ubuntu) documentation.
 
-6. [pipenv](https://pypi.org/project/pipenv/) v2021.5.29+: as of Sep 22, 2022, the latest version of `pipenv` is 2022.9.20. We will use `pip` to install `pipenv`. 
+6. [pipenv](https://pypi.org/project/pipenv/) v2021.5.29+: as of Sept 22, 2022, the latest version of `pipenv` is 2022.9.20. We will use `pip` to install `pipenv`. 
 
 ```
 pip3 install pipenv
@@ -201,7 +201,7 @@ pipenv install cdktf-cdktf-provider-aws
 ```
 
 
->Note: as of the 26th of Sep, 2022, if you decide to install the AWS Provider using `cdktf provider add "aws@~>4.0"`, the installation will fail due to [no matching distribution found for version v9.0.36](https://github.com/hashicorp/cdktf-provider-aws/issues/749). There are other methods of importing a provider but this tutorial won't discuss to focus on simplicity. 
+>Note: as of the 26th of Sept, 2022, if you decide to install the AWS Provider using `cdktf provider add "aws@~>4.0"`, the installation will fail due to [no matching distribution found for version v9.0.36](https://github.com/hashicorp/cdktf-provider-aws/issues/749). There are other methods of importing a provider but this tutorial won't discuss to focus on simplicity. 
 
 ---
 
