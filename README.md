@@ -19,7 +19,6 @@
     - [CDKTF Commands](#cdktf-commands)
 - [Step 5: Deploying a Lambda Function URL using CDKTF](#step-5-deploying-a-lambda-function-url-using-cdktf)
 - [Conclusion](#conclusion)
-- [References](#references)
 <!-- /TOC -->
 ---
 
