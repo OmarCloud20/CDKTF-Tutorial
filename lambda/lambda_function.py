@@ -46,7 +46,7 @@ def lambda_handler(event, context):
         <body>
 
             <h1>Hello AWS Community Builders</h1>
-            <p>I'm a static web page running on a Lambda function. Thank you CDKT for Terraform for letting me dance.</p>
+            <p>I'm a static web page running on a Lambda function. Thank you CDK for Terraform for letting me do my moves.</p>
             <img src="https://acegif.com/wp-content/gifs/banana-82.gif" class="responsive" width="600" height="auto">
         </body>
     </html>

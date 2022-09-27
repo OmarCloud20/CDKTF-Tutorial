@@ -524,6 +524,7 @@ I have entered `yes` to migrate the state file to the S3 remote backend and let 
 cdktf diff
 ```
 
+>Note: you have to be in the project root directory to run `cdktf diff`.
 
 
 Great! You have successfully migrated the local state backend to an S3 remote backend. Way to go, you have achieved another milestone! 🎉🎉🎉
@@ -565,7 +566,7 @@ This is the code snippet for creating an S3 bucket with minimal configurations:
 my_3bucket= s3.S3Bucket(self, "s3_bucket")
 ```
 
->Note: the name of the S3 bucket is not specified. If you leave the name argument empty, the S3 bucket will be created with a random name.
+>Note: if you leave the name argument empty, the S3 bucket will be created with a random name.
 
 ---
 
@@ -653,7 +654,7 @@ Buckle up, we are going to learn a lot in this section! 🚀🚀🚀
 
 3. Copy the `lambda_function.py` code from my [GitHub repository](https://raw.githubusercontent.com/OmarCloud20/CDKTF-Tutorial/main/lambda/lambda_function.py) and paste it into the `lambda_function.py` file.
 
-4. I go over the `main.py` code and the final `main.py` file will provided at the end of the section. 
+4. I will go over the `main.py` code and the final `main.py` file will provided at the end of the section. 
 
 - In the `main.py` file, import the `TerraformOutput`, `TerraformAsset` and `AssetType` classes from the `cdktf` module. [Assets](https://developer.hashicorp.com/terraform/cdktf/concepts/assets) construct is introduced in CDK for Terraform v0.4+ and is used to package a local directory and python file into a zip file. The `TerraformOutput` construct is used to create an output for the Lambda function url. The `AssetType` is used to specify the type of asset. 
 
@@ -845,11 +846,15 @@ app.synth()
 cdktf deploy
 ```
 
->Note: you can also run `cdktf deploy --auto-approve` to deploy the stack without confirmation. However, refrain from using this option in production.
+>Note: you can also run `cdktf deploy --auto-approve` to deploy the stack without confirmation. However, I would suggest to refrain from using this option in production unless you are absolutely sure that you want to deploy the stack without confirmation.
+
+Finally, grab the `lambda_url` output and paste it in your browser. If you see the dancing bananas, then you have successfully deployed your first lambda function using CDKTF.
+
+![lambda function url](images/lambda_url.png)
 
 <br>
 
-Congratulations! You have successfully deployed a lambda function with a function url using CDKTF. You can copy the function url from the output and paste it in your browser to invoke the lambda function. 
+Congratulations! You have successfully deployed a lambda function with a function url using CDKTF. I'm sure you feel like you are on top of the world right now. Well done!
 
 ---
 
@@ -868,9 +873,13 @@ A. Add `force_destroy=True` to the `s3_backend_bucket` configurations. The S3 bu
         )
 ```
 
-B. Run `cdktf deploy` to update the S3 bucket configurations. 
+B. Run `cdktf deploy` to update the S3 bucket configurations:
 
-C. Run `cdktf destroy` to delete the entire stack.
+```
+cdktf deploy
+```
+
+C. Run `cdktf destroy` to delete the entire stack:
 
 ```
 cdktf destroy
@@ -885,9 +894,21 @@ cdktf destroy
 
 ## Conclusion
 
-In this tutorial, we have learned how to properly install and configure CDKTF, how to migrate from a local backend to an S3 remote backend. We have also learned how to deploy a lambda function with a function url using CDKTF; in addition, to learning how to read and utilize the CDKTF documentation from the Construct Hub.
+In this tutorial, we have learned how to properly install and configure CDKTF, how to migrate from a local backend to an S3 remote backend. We have also learned how to deploy a lambda function with a function url using CDKTF. We have also briefly learned how to read and utilize the CDKTF documentations from the Construct Hub.
 
-Congratulations on completing this tutorial, overcoming these challenges and achieving many learning milestones. I hope you enjoyed this tutorial, and it added value to your learning journey. Thank you for reading!
+The most important thing to remember is that CDKTF is still in its early stages. There are many features that are not yet available. However, I am confident that CDKTF will be a great tool for managing Terraform stacks in the future.
+
+
+Congratulations on completing this tutorial and overcoming several challenges. You have achieved many learning milestones. I hope this tutorial added value to your learning journey. Thank you for reading! 
+
+Omar A Omar
+Site Reliability Engineer
+AWS Community Builder 
+
+AWS Certified Solutions Architect - Associate
+AWS Certified Developer - Associate
+AWS Certified SysOps Administrator - Associate
+HashiCorp Certified Terraform Associate
 
 
 
