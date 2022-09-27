@@ -889,8 +889,6 @@ cdktf destroy
 
 ---
 
-<br>
-
 
 ## Conclusion
 
