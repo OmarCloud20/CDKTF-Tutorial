@@ -901,7 +901,7 @@ The most important thing to remember is that CDKTF is still in its early stages.
 
 Congratulations on completing this tutorial and overcoming several challenges. You have achieved many learning milestones. I hope this tutorial added value to your learning journey. Thank you for reading! 
 
-Omar A Omar
+Omar A Omar (space, space, Enter)
 Site Reliability Engineer
 
 AWS Community Builder 
