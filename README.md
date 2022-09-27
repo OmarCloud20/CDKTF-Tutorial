@@ -906,10 +906,4 @@ Site Reliability Engineer\
 AWS Community Builder
 
 
-AWS Certified Solutions Architect - Associate\
-AWS Certified Developer - Associate\
-AWS Certified SysOps Administrator - Associate\
-HashiCorp Certified Terraform Associate
-
-
-
+[![Credly](/images/credly.png)](https://www.credly.com/users/omar.omar)
