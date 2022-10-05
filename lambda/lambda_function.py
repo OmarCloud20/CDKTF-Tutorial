@@ -1,6 +1,6 @@
 """
 Omar A Omar
-This function creates a static page on a Lambda function
+This function returns a static page from a Lambda function
 """
 
 def lambda_handler(event, context):

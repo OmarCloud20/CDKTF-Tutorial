@@ -1,5 +1,7 @@
 # CDK for Terraform (CDKTF) on AWS: 
-## How to Configure an S3 Remote Backend and Deploy a Lambda Function URL using Python on Ubuntu 20.04 LTS
+## How to configure an S3 Remote Backend and deploy a Lambda Function using Python on Ubuntu 20.04 LTS
+###  Update (10/5/22): this tutorial works with CDK for Terraform version 0.12. On the 3rd of Oct, 2022, Hashicorp released [CDKTF 0.13](https://github.com/hashicorp/terraform-cdk/issues/2160) introducing namespaces. I will update the tutorial to work with version 0.13 in the near future.
+### Update(10/5/22): thank you @ansgarm for reviewing the tutorial and for your valuable feedback. 
 
 ![CDKTF](images/CDKTF.png)
 
@@ -24,11 +26,11 @@
 
 ## Introduction
 
-After two years of collaboration between AWS and HashiCorp and on the 9th of August, 2022, AWS announced the general availability of [CDK for Terraform](https://aws.amazon.com/blogs/opensource/announcing-cdk-for-terraform-on-aws/) on AWS. As the CDKTF framework finally saw the light of day, the news triggered lots excitement among the community. The CDKTF framework is a new open-source project that enables developers to use their favorite programming languages to define and provision cloud infrastructure resources on AWS. Under the hood, it converts the programming language definitions into Terraform configuration files and uses Terraform to provision the resources. 
+After two years of development, on the 1st of August 2022, HashiCorp announced the general availability of [CDK for Terraform](https://www.hashicorp.com/blog/cdk-for-terraform-now-generally-available). As the CDKTF framework finally saw the light of day, the news triggered lots excitement among the community. The CDKTF framework is a new open-source project that enables developers to use their favorite programming languages to define and provision cloud infrastructure resources on AWS. Under the hood, it converts the programming language definitions into Terraform configuration files and uses Terraform to provision the resources. 
  
 **"Learning is no longer a stage of life; it’s a lifelong journey" - Andy Bird**
 
-It's often said that the best way to learn something new is to do it, and the first milestone in learning is often the hardest. However, with the right guidance, you can overcome the challenges and achieve your goals. My objective in this article is to guide you through the process of installing, configuring, and deploying your first AWS resource using CDKTF on AWS. In addition, I will also show you how to use the Construct Hub documentations to deploy your own AWS resources.
+It's often said that the best way to learn something new is to do it, and the first milestone in learning is often the hardest. However, with the right guidance, you can overcome the challenges and achieve your goals. My objective in this article is to guide you through the process of installing, configuring, and deploying your first AWS resource using CDKTF on AWS. In addition, I will also show you how to use the documentation on Construct Hub to deploy your own AWS resources.
 
 The tutorial should be easy to follow and understand for beginners and intermediate users. The tutorial is devoted to developers with adequate AWS, Terraform and Python knowledge but who are unsure of how and where to begin their CDKTF learning. 
 
@@ -37,10 +39,10 @@ The main topics covered in this tutorial are:
 1. Proper installation and configuration of all required prerequisites.
 2. Installing and configuring CDKTF.
 3. Initializing first CDKTF project using Python template and local backend.
-4. Deploying a S3 bucket and DynamoDB table and configuring an S3 remote backend.
+4. Deploying an S3 bucket and DynamoDB table and configuring an S3 remote backend.
 5. Learning how to read/use AWS Provider Submodules and Construct Hub documentations
 6. Provisioning an S3 Bucket using CDKTF
-7. Provisioning an IAM role and Lambda Function URL using CDKTF
+7. Provisioning an IAM role and Lambda Function using CDKTF
 
 This tutorial is also available on my GitHub - [CDKTF-Tutorial](https://github.com/OmarCloud20/CDKTF-Tutorial) repo. By the end of this tutorial, you shall be comfortable deploying AWS resources using the CDKTF framework. I will pass you the learning baton and you can take it from there.
 Enough said, let's get started.
@@ -124,16 +126,16 @@ pipenv --version
 
 
 
-7. CDKFT: now, we are ready to install the latest stable release of `CDKTF` using `npm`:
+7. CDKFT: now, we are ready to install the `CDKTF` using `npm`:
 
 ```
-npm install --global cdktf-cli@latest
+npm install --global cdktf-cli@0.12.3
 ```
 
 If you receive a permission denied error, use `sudo` as shown below:
 
 ```
-sudo npm install --global cdktf-cli@latest
+sudo npm install --global cdktf-cli@0.12.3
 ```
 Let's confirm the version:
 
@@ -155,7 +157,7 @@ Reaching this point means you have all required prerequisites installed and conf
 ## Step 2: Initializing the First CDKTF Project using Python Template
 
 
-In this section, we will learn how to use `CDKTF` commands to create our first AWS CDKTF Python project. We will use the `cdktf init` command to create a new project in the current directory. The command also creates a `cdktf.json` file that contains the project configuration. The `cdktf.json` file contains the project name, the programming language, and the Terraform provider. The `cdktf.json` file is used by the `cdktf` command to determine the project configuration. Follow the below steps to initialize the first CDKTF project using Python template:
+In this section, we will learn how to use CDKTF CLI commands to create our first AWS CDKTF Python project. We will use the `cdktf init` command to create a new project in the current directory. The command also creates a `cdktf.json` file that contains the project configuration. The `cdktf.json` file contains e.g. the programming language, and the Terraform provider. The `cdktf.json` file is used by the `cdktf` command to determine the project configuration. Follow the below steps to initialize the first CDKTF project using Python template:
 
 
 1. Create a new directory for the project and `cd` into the directory. I will create a directory on my Desktop and name it `first_project`:
@@ -181,7 +183,7 @@ cdktf init --template="python" --local
 >Note 1: we are using the `--local` flag to store our Terraform state file locally. We will reconfigure the backend to S3 Remote backend in the next section.
 
 
->Note 2: if you receive error `[ModuleNotFoundError: No module named 'virtualenv.seed.via_app_data']`, you would need to remove `virtualenv` by running `sudo apt remove  python3-virtualenv`. We should still have `virtualenv` as part of the pip packages. Run `pip3 show virtualenv` to confirm. If you don't see `virtualenv` in the list, run `pip3 install virtualenv` to install it.
+>Note 2: if you receive the error `[ModuleNotFoundError: No module named 'virtualenv.seed.via_app_data']`, you would need to remove `virtualenv` by running `sudo apt remove  python3-virtualenv`. We should still have `virtualenv` as part of the pip packages. Run `pip3 show virtualenv` to confirm. If you don't see `virtualenv` in the list, run `pip3 install virtualenv` to install it.
 
 
 3. Activate the project's virtual environment (optional but recommended):
@@ -194,7 +196,7 @@ pipenv shell
 
 >Note: the purpose of creating a virtual environment is to isolate the project and and all its packages and dependencies from the host or local device. It's a self contained environment within the host to prevent polluting the system. It's highly recommended to activate it to keep your host healthy and clean. 
 
-4. Install AWS provider. There are multiple ways to install [AWS Provider](https://constructs.dev/packages/@cdktf/provider-aws/v/9.0.36?lang=python). We will use `pipenv` to install the AWS provider. Run the below command to install the AWS provider:
+4. Install the AWS provider. There are multiple ways to install [AWS Provider](https://constructs.dev/packages/@cdktf/provider-aws/v/9.0.36?lang=python). We will use `pipenv` to install the AWS provider. Run the below command to install the AWS provider:
 
 ```
 pipenv install cdktf-cdktf-provider-aws
@@ -225,7 +227,7 @@ For this tutorial, we will configure an [S3 Remote Backend](https://www.terrafor
 
 ### Option 1: Utilize an existing S3 bucket and DynamoDB to configure the S3 Remote Backend. 
 
-1. From Step 2, while we still have the virtual environment activated, let's open the project directory using our choice of an Integrated Development Environment (IDE). In my case, I'm using [Visual Studios Code](https://code.visualstudio.com/) which I downloaded from the `Ubuntu Software Store`. Run `code .` on the terminal to open the project directory via VS Code.
+1. From Step 2, while we still have the virtual environment activated, let's open the project directory using our choice of an Integrated Development Environment (IDE). In my case, I'm using [Visual Studio Code](https://code.visualstudio.com/) which I downloaded from the `Ubuntu Software Store`. Run `code .` on the terminal to open the project directory in VS Code.
 
 2. Navigate to `main.py` file and add the AWS provider construct to the imports section:
 
@@ -309,7 +311,7 @@ app.synth()
 ```
 ![code](images/code.png)
 
-6. Run `cdktf synth` to generate the Terraform configuration files. The Terraform configuration files will be generated in the `cdktf.out` directory. The `synth` command will fail if the S3 bucket and DynamoDB table don't exist. 
+6. Run `cdktf synth` to generate the Terraform configuration files. The Terraform configuration files will be generated in the `cdktf.out` directory. ~~The `synth` command will fail if the S3 bucket and DynamoDB table don't exist.~~ 
 
 
 ```
@@ -502,7 +504,7 @@ When you run `terraform init --migrate-state`, Terraform prompts you to answer t
 
 
 
-A. If you enter, `yes` to migrate the state file to the S3 backend, CDKTF will manage the S3 remote backend (S3 bucket and DynamoDB table) for you. Therefore, if you delete the stack, the S3 bucket and DynamoDB table will be vurnerable to deletion. Note, we can't delete a non-empty S3 unless we add `force_destroy=True` to the S3 bucket configuration. This option is not recommended if you want to keep the S3 bucket and DynamoDB table, especially if you are using the S3 bucket and DynamoDB table as a remote backend for other Terraform projects. But, if you are just experimenting with CDKTF, this option is fine.
+A. If you enter, `yes` to migrate the state file to the S3 backend, CDKTF will manage the S3 remote backend (S3 bucket and DynamoDB table) for you. Therefore, if you delete the stack, the S3 bucket and DynamoDB table will be vulnerable to deletion. Note, we can't delete a non-empty S3 unless we add `force_destroy=True` to the S3 bucket configuration. This option is not recommended if you want to keep the S3 bucket and DynamoDB table, especially if you are using the S3 bucket and DynamoDB table as a remote backend for other Terraform projects. But, if you are just experimenting with CDKTF, this option is fine.
 
 B. If you enter `no`, to migrate the state file to the S3 backend, CDKTF will not manage the S3 bucket and DynamoDB table. If you delete the stack, the S3 bucket and DynamoDB table will not be deleted and you will have to manually delete the S3 bucket and DynamoDB table. Moreover, you will also need to remove the S3 bucket and DynamoDB table constructs from the `main.py` file. 
 
@@ -668,7 +670,7 @@ import os.path as Path
 ```
 >Note, we have imported `os` and `os.path as Path` modules. We will use these modules to get the current working directory and to join the path to the lambda directory.
 
-- The `TerraformAsset` construct requires a `path` argument. The `path` argument is the path to the directory or file that you want to package. In this case, we will use the `os` module to get the current working directory and then join the path to the `lambda` directory. The `AssetType.ARCHIVE` is to specify that the asset is an archive. The final `path` argument should look like this:
+- The `TerraformAsset` construct requires a `path` argument. The `path` argument is the path to the directory or file that you want to package. In this case, we will use the `os` module to get the current working directory and then join the path to the `lambda` directory. The `AssetType.ARCHIVE` is to specify that the asset should produce an archive. The final `path` argument should look like this:
 
 
 ```
@@ -678,7 +680,7 @@ type = AssetType.ARCHIVE,
 )
 ```
 
-- Creating a Lambda function requires creating an IAM role. Therefore, we will create an IAM role first. We will also attach the `AWSLambdaBasicExecutionRole` AWS managed policy to the IAM role. This policy allows the Lambda function to write logs to CloudWatch. Refer to AWS documentation for more information about the [AWSLambdaBasicExecutionRole](https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html#:~:text=June%2017%2C%202022-,AWSLambdaBasicExecutionRole,-%E2%80%93%20Lambda%20started%20tracking) policy.
+- Creating a Lambda function requires creating an IAM role. Therefore, we will create an IAM role first. We will also attach the `AWSLambdaBasicExecutionRole` AWS managed policy to the IAM role. This policy allows the Lambda function to write logs to CloudWatch. Refer to the AWS documentation for more information about the [AWSLambdaBasicExecutionRole](https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html#:~:text=June%2017%2C%202022-,AWSLambdaBasicExecutionRole,-%E2%80%93%20Lambda%20started%20tracking) policy.
 
 The `assume_role_policy` argument is the policy that grants permission to assume the IAM role, which requires a JSON string. The JSON string is the policy document that grants permission to assume the IAM role. The final snippet of code should look like this:
 
@@ -705,7 +707,7 @@ The `assume_role_policy` argument is the policy that grants permission to assume
 
 ```
 
-- Now, we are ready to create a lambda function. The `handler` configuration is the name of the python file that contains the lambda function. The `runtime` provides a language-specific environment that runs in an execution environment. The `source_code_hash` argument is the hash of the file that contains the lambda function. The `source_code_hash` argument is required to trigger a new deployment when the lambda function code changes. The `filename` argument is the path to the file that contains the lambda function.
+- Now, we are ready to create a lambda function. The `handler` configuration is the name of the Python file that contains the lambda function. The `runtime` provides a language-specific environment that runs in an execution environment. The `source_code_hash` argument is the hash of the file that contains the lambda function. The `source_code_hash` argument is required to trigger a new deployment when the lambda function code changes. The `filename` argument is the path to the file that contains the lambda function.
 
 
  The final snippet of code should look like this:
@@ -891,9 +893,9 @@ cdktf destroy
 
 ## Conclusion
 
-In this tutorial, we have learned how to properly install and configure CDKTF, how to migrate from a local backend to an S3 remote backend. We have also learned how to deploy a lambda function with a function url using CDKTF. We have also briefly learned how to read and utilize the CDKTF documentations from the Construct Hub.
+In this tutorial, we have learned how to properly install and configure CDKTF, how to migrate from a local backend to an S3 remote backend. We have also learned how to deploy a lambda function with a function url using CDKTF. We have also briefly learned how to read and utilize the CDKTF documentation from the Construct Hub.
 
-The most important thing to remember is that CDKTF is still in its early stages. There are many features that are not yet available. However, I am confident that CDKTF will be a great tool for managing Terraform stacks in the future.
+The most important thing to remember is that CDKTF is still in its early stages. I am confident that CDKTF will be a great tool for managing Terraform stacks in the near future.
 
 
 Congratulations on completing this tutorial and overcoming several challenges. You have achieved many learning milestones. I hope this tutorial added value to your learning journey. Thank you for reading! 
