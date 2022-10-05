@@ -1,7 +1,7 @@
 # CDK for Terraform (CDKTF) on AWS: 
 ## How to configure an S3 Remote Backend and deploy a Lambda Function using Python on Ubuntu 20.04 LTS
-###  Update (10/5/22): this tutorial works with CDK for Terraform version 0.12. On the 3rd of Oct, 2022, Hashicorp released [CDKTF 0.13](https://github.com/hashicorp/terraform-cdk/issues/2160) introducing namespaces. I will update the tutorial to work with version 0.13 in the near future.
-### Update(10/5/22): thank you @ansgarm for reviewing the tutorial and for your valuable feedback. 
+####  Update (10/5/22): this tutorial works with CDK for Terraform version 0.12. On the 3rd of Oct, 2022, Hashicorp released [CDKTF 0.13](https://github.com/hashicorp/terraform-cdk/issues/2160) introducing namespaces. I will update the tutorial to work with version 0.13 in the near future.
+#### Update(10/5/22): thank you @ansgarm for reviewing the tutorial and for your valuable feedback. 
 
 ![CDKTF](images/CDKTF.png)
 
