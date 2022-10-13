@@ -1,7 +1,11 @@
 # CDK for Terraform (CDKTF) on AWS: 
 ## How to configure an S3 Remote Backend and deploy a Lambda Function using Python on Ubuntu 20.04 LTS
-####  Update (10/5/22): this tutorial works with CDK for Terraform version 0.12. On the 3rd of Oct, 2022, Hashicorp released [CDKTF 0.13](https://github.com/hashicorp/terraform-cdk/issues/2160) introducing namespaces. I will update the tutorial to work with version 0.13 in the near future.
-#### Update(10/5/22): thank you @ansgarm for reviewing the tutorial and for your valuable feedback. 
+####  Update (10/5/22): 
+
+On the 3rd of Oct, 2022, HashiCorp released [CDKTF version 0.13](https://github.com/hashicorp/terraform-cdk/issues/2160) introducing breaking changes such as namespaces. Due to this latest major upgrade, this tutorial does not work with CDKTF version 0.13. But it still works with CDKTF version 0.12. I will update the tutorial to work with version 0.13 in the near future.
+
+Special thank you to @ansgarm for reviewing the tutorial and valuable feedback. 
+
 
 ![CDKTF](images/CDKTF.png)
 
@@ -39,8 +43,8 @@ The main topics covered in this tutorial are:
 1. Proper installation and configuration of all required prerequisites.
 2. Installing and configuring CDKTF.
 3. Initializing first CDKTF project using Python template and local backend.
-4. Deploying an S3 bucket and DynamoDB table and configuring an S3 remote backend.
-5. Learning how to read/use AWS Provider Submodules and Construct Hub documentations
+4. Deploying an S3 bucket, DynamoDB table and configuring an S3 remote backend.
+5. Learning how to read/use AWS Provider Submodules and Construct Hub documentation
 6. Provisioning an S3 Bucket using CDKTF
 7. Provisioning an IAM role and Lambda Function using CDKTF
 
@@ -535,27 +539,27 @@ Great! You have successfully migrated the local state backend to an S3 remote ba
 
 
 
-## Step 4: Learn How to Use Construct Hub and AWS Provider Submodules
+## Step 4: Learn How to use Construct Hub and AWS Provider Submodules
 
 Prior to digging into the AWS provider, let's first understand most commonly used terms in the CDKTF documentation:
 
 1. Submodules is a collection of related resources. For example, the `s3.S3Bucket` construct is part of the `s3` submodule. The `s3.S3Bucket` construct creates an S3 bucket. The `s3` submodule contains other constructs such as `s3.S3BucketPolicy`, `s3.S3BucketAcl`, `s3.S3BucketObject`, etc.
 
-2. [Construct](https://developer.hashicorp.com/terraform/cdktf/concepts/constructs) is another important term to understand. A construct is a class that represents a Terraform resource, data source, or provider. The `s3` submodule contains constructs that represent S3 constructs, classes and struts. 
+2. [Construct](https://developer.hashicorp.com/terraform/cdktf/concepts/constructs) is another important term to understand. A construct is a class that represents a Terraform resource, data source, or provider. The `s3` submodule contains classes that represent S3 constructs, classes and structs. 
 
-3. Stack is a collection of constructs. The `MyStack` class in the `main.py` file is a stack. The `MyStack` class contains constructs that represent S3 constructs, classes and struts. 
+3. Stack is a collection of constructs. The `MyStack` class in the `main.py` file is a stack. The `MyStack` class in the `main.py` file is a stack. The `MyStack` class contains constructs that represent e.g. Terraform resources, data sources, and providers.
 
 ---
 
 
 ### Scenario 1: S3 Bucket
 
-Let's say we would like to create an S3 but we don't know which construct to use. Let's head to the Python [Construct hub](https://constructs.dev/packages/@cdktf/provider-aws/v/9.0.33?lang=python) for the AWS provider and follow the steps below:
+Let's say we would like to create an S3 bucket but we don't know which construct to use. Let's head to the Python [Construct Hub](https://constructs.dev/packages/@cdktf/provider-aws/v/9.0.33?lang=python) for the AWS provider and follow the steps below:
 
 1. From the left hand side and under **Documentation**, click on **Choose Submodule**. 
 2. In the search box, type in **s3** and then click on the result, which is **s3**. 
-3. Under **Submodule:s3**, you will see a list of **Constructs** and **Struts**. Click on **S3Bucket**
-4. To create an S3 bucket, you will import the **s3** class as shown under `Initializers`.
+3. Under **Submodule:s3**, you will see a list of **Constructs** and **Structs**. Click on **S3Bucket**
+4. To create an S3 bucket, you will import the **s3** submodule as shown under `Initializers`.
 5. The construct to use is `s3.S3Bucket`. 
 6. We need to find the required configurations for the `s3.S3Bucket` construct. Scan the page and look for configurations marked `Required`. In this case, S3 bucket does not have any required configuration, not even a name. If you leave the name argument empty, the S3 bucket will be created with a random name. We can specify a name for the S3 bucket and other configurations, but this is not required. 
 
@@ -573,11 +577,11 @@ my_3bucket= s3.S3Bucket(self, "s3_bucket")
 
 ### Scenario 2: ECS Cluster
 
-This time let's say we would like to create an ECS cluster. Let's head to the Python [Construct hub](https://constructs.dev/packages/@cdktf/provider-aws/v/9.0.33?lang=python) for the AWS provider and follow the steps below:
+This time let's say we would like to create an ECS cluster. Let's head to the Python [Construct Hub](https://constructs.dev/packages/@cdktf/provider-aws/v/9.0.33?lang=python) for the AWS provider and follow the steps below:
 
 1. From the left hand side and under **Documentation**, click on **Choose Submodule**.
 2. In the search box, type in **ecs** and then click on the result, which is **ecs**.
-3. Under **Submodule:ecs**, you will see a list of **Constructs** and **Struts**. Click on **EcsCluster**
+3. Under **Submodule:ecs**, you will see a list of **Constructs** and **Structs**. Click on **EcsCluster**
 4. To create an ECS cluster, you will import **ecs** class as shown under `Initializers`.
 5. The construct to use is `ecs.EcsCluster` as shown below.
 6. We need to find the required configurations for the `ecs.EcsCluster` construct. The minimum required configurations to create an ECS cluster is just the `name` of the cluster. But, we can also specify other configurations such as, `capacity_providers`, `default_capacity_provider_strategy`, `configuration`, etc. 
@@ -628,7 +632,7 @@ For example, to learn more about the `cdktf deploy` command, run `cdktf deploy -
 
 ## Step 5: Deploying a Lambda Function URL using CDKTF
 
-CDKTF is a great tool to provision AWS resources. We have already created an S3 bucket and DynamoDB table in the previous section. In this section, I will show you how to create a Lambda function using CDKTF with function url enabled. The lambda will host a simple static web page, and well configure the function url as an output. The process requires creating an IAM role and attaching a policy to the role. I will also introduce you to multiple concepts in CDKTF. 
+CDKTF is a great tool to provision AWS resources. We have already created an S3 bucket and DynamoDB table in the previous section. In this section, I will show you how to create a Lambda function using CDKTF with function url enabled. The lambda will host a simple static web page, and we'll configure the function url as an output. The process requires creating an IAM role and attaching a policy to the role. I will also introduce you to multiple concepts in CDKTF. 
 
 In this section, I will cover the following topics:
 
@@ -649,7 +653,7 @@ Buckle up, we are going to learn a lot in this section! 🚀🚀🚀
 **Follow the steps below to deploy a Lambda function URL using CDKTF:**
 
 
-1. Firstly, let's keep out project organized and create a new directory called `lambda` in the root directory of the project. This is where we will store our Lambda function code. 
+1. Firstly, let's keep our project organized and create a new directory called `lambda` in the root directory of the project. This is where we will store our Lambda function code. 
 
 2. Create a new file called `lambda_function.py` in the `lambda` directory.
 
@@ -657,7 +661,7 @@ Buckle up, we are going to learn a lot in this section! 🚀🚀🚀
 
 4. I will go over the `main.py` code and the final `main.py` file will provided at the end of the section. 
 
-- In the `main.py` file, import the `TerraformOutput`, `TerraformAsset` and `AssetType` classes from the `cdktf` module. [Assets](https://developer.hashicorp.com/terraform/cdktf/concepts/assets) construct is introduced in CDK for Terraform v0.4+ and is used to package a local directory and python file into a zip file. The `TerraformOutput` construct is used to create an output for the Lambda function url. The `AssetType` is used to specify the type of asset. 
+- In the `main.py` file, import the `TerraformOutput`, `TerraformAsset` and `AssetType` classes from the `cdktf` module. The [Asset](https://developer.hashicorp.com/terraform/cdktf/concepts/assets) construct was introduced in CDK for Terraform v0.4+ and is used to package our local directory and python file into a zip file. The `TerraformOutput` construct is used to create an output for the Lambda function url. The `AssetType` is used to specify the type of asset. 
 
 The final import statements should look like this:
 
